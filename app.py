@@ -66,5 +66,3 @@ if submitted:
     else:
         st.success("✅ Good News: Our model predicts you are at low risk of heart disease.")
         st.write(f"Confidence: **{prediction_proba[0][0] * 100:.2f}%**")
-
-    st.caption("*Disclaimer: This tool is for educational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment.*")
