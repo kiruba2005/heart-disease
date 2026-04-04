@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 import numpy as np
 
-st.set_page_config(page_title="Heart Disease Predictor", page_icon="❤️", layout="centered")
+st.set_page_config(page_title="Cardiovascular Disease Predictor", layout="centered")
 
 @st.cache_resource
 def load_model():
@@ -13,7 +13,7 @@ def load_model():
 
 model = load_model()
 
-st.title("❤️ Heart Disease Prediction App")
+st.title("Cardiovascular Disease Prediction App")
 st.write("Enter your clinical parameters below to assess your risk of heart disease.")
 
 st.markdown("---")
@@ -58,11 +58,36 @@ if submitted:
     prediction = model.predict(input_data)
     prediction_proba = model.predict_proba(input_data)
 
-    st.write("### 🔍 Results")
+    st.write("### Results")
 
     if prediction[0] == 1:
-        st.error("🚨 Warning: Our model predicts you are at high risk of heart disease.")
+        st.error("Warning: You are at high risk of Cardiovascular disease.")
         st.write(f"Confidence: **{prediction_proba[0][1] * 100:.2f}%**")
     else:
-        st.success("✅ Good News: Our model predicts you are at low risk of heart disease.")
+        st.success("You are at low risk of Cardiovascular disease.")
         st.write(f"Confidence: **{prediction_proba[0][0] * 100:.2f}%**")
+
+    st.write("### Explainable AI - Feature Importance")
+
+    feature_names = [
+        "Age","Sex","Chest Pain","Resting BP","Cholesterol","Fasting Blood Sugar",
+        "RestECG","Max Heart Rate","Exercise Angina","Oldpeak","Slope","CA","Thal"
+    ]
+
+    importance = model.feature_importances_
+
+    importance_df = pd.DataFrame({
+        "Feature": feature_names,
+        "Importance": importance
+    })
+
+    importance_df = importance_df.sort_values(by="Importance", ascending=False)
+
+    st.bar_chart(importance_df.set_index("Feature"))
+
+    st.write("### Most Influential Factors")
+
+    top_features = importance_df.head(3)
+
+    for index, row in top_features.iterrows():
+        st.write(f"**{row['Feature']}** has a strong influence on the prediction (importance score: {row['Importance']:.3f})")
