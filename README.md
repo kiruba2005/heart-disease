@@ -1,4 +1,4 @@
-# ❤️ Heart Disease Prediction App
+# Cardiovascular Disease Prediction App
 
 A Machine Learning-powered web application built with Python and Streamlit. This app allows users to input standard clinical parameters and instantly assesses their risk of heart disease using a trained Random Forest Classifier.
 
