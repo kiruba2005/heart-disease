@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: heart-app
-        image: YOUR_DOCKERHUB_USERNAME/heart-disease-app:latest
+        image: gobiananth0x/heart-disease-app:latest
         ports:
         - containerPort: 8501
 ---
