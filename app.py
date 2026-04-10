@@ -91,3 +91,5 @@ if submitted:
 
     for index, row in top_features.iterrows():
         st.write(f"**{row['Feature']}** has a strong influence on the prediction (importance score: {row['Importance']:.3f})")
+
+# kiruba
